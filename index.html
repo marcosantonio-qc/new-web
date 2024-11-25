@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora Quito y Madrid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .reloj {
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .hora {
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="reloj" id="quito">
+        <h1>Hora en Quito</h1>
+        <p class="hora" id="horaQuito">Cargando...</p>
+    </div>
+    <div class="reloj" id="madrid">
+        <h1>Hora en Madrid</h1>
+        <p class="hora" id="horaMadrid">Cargando...</p>
+    </div>
+
+    <script>
+        function actualizarHora() {
+            const ahora = new Date();
+
+            // Hora en Quito (GMT-5)
+            const opcionesQuito = { timeZone: 'America/Guayaquil', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const horaQuito = ahora.toLocaleTimeString('es-EC', opcionesQuito);
+            document.getElementById('horaQuito').textContent = horaQuito;
+
+            // Hora en Madrid (GMT+1 o GMT+2 con horario de verano)
+            const opcionesMadrid = { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const horaMadrid = ahora.toLocaleTimeString('es-ES', opcionesMadrid);
+            document.getElementById('horaMadrid').textContent = horaMadrid;
+        }
+
+        // Actualizar cada segundo
+        setInterval(actualizarHora, 1000);
+        actualizarHora();
+    </script>
+</body>
+</html>
